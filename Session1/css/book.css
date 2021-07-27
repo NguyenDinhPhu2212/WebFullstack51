@@ -1,0 +1,17 @@
+.book {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    background-color: #0051ff;
+    border-radius: 10px;
+    color: white;
+}
+.book > div {
+    text-align: center;
+    font-weight: bold;
+    margin: 10px auto;
+}
+.book .name {
+    font-weight: bold;
+}
