@@ -45,7 +45,7 @@ app.put("/api/manga/:id", (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     let updateIndex = manga.findIndex((item) => item.id == req.params.id);
-    if (updateIndex >= 0) {
+    if (updateIndex == -1) {
         return res.status(400).send("Manga not found");
     }
     try {
