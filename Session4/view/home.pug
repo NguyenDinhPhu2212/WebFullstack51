@@ -1,0 +1,49 @@
+html
+head
+    title SHOPPING CART
+    meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet")
+    link(href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet")
+    style 
+        include ../css/style.css
+body
+    div.container
+        div.header
+            h1(style="text-align:center;") NODEJS SHOPPING CART
+            div.cartBtn(onclick=`clickCart()`)
+                <i class="fal fa-shopping-cart"></i> Cart
+        div
+            each val of listItems
+                div.container
+                .card(style = "margin: auto;margin-top: 5%; width: 800px;")
+                    h3.card-header=val.name
+                    .card-body.item-card
+                        div
+                            div.price Price:
+                                span=val.price
+                            div.count Count:
+                                span=val.count
+                        form(action="/cart" method="post" enctype="application/x-www-form-urlencoded")
+                            input(type="hidden" name="name",value=`${val.name}`)
+                            input(type="hidden" name="price",value=`${val.price}`)
+                            button.btn.btn-success(type="submit") Add to cart
+                        //- button.btn.btn-success(type="submit", onclick=`something('${val.name}')`) Add to cart
+        div.cart 
+            table 
+                each val of cartItems
+                    tr
+                        td(style="width: 200px;")=val.name
+                        td(style="width: 50px;")=val.count
+                        td(style="width: 50px;")=val.price
+            div.total(style="text-align:right;margin-right: 20px;") Total: 
+                span= (cartItems.reduce((sum, value)=> sum += value.price*value.count , 0))
+            button.btn.btn-success(type="submit") Buy
+
+    script.
+        let something = function(val) {
+            console.log(val);
+        }
+        let clickCart = function(){
+            let cart = document.querySelector(".cart");
+            cart.style.display = cart.style.display == "none"?"block":"none"
+        }
